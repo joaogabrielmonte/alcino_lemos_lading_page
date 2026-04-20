@@ -1,0 +1,26 @@
+<svg width="456" height="456" viewBox="0 0 456 456" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldFill" x1="72" y1="52" x2="396" y2="396" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF8E4" />
+      <stop offset="0.38" stop-color="#E8D3A1" />
+      <stop offset="0.7" stop-color="#D5B774" />
+      <stop offset="1" stop-color="#A98541" />
+    </linearGradient>
+    <linearGradient id="goldStroke" x1="90" y1="66" x2="370" y2="382" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F6E3AF" />
+      <stop offset="1" stop-color="#8E6A2E" />
+    </linearGradient>
+    <filter id="shadow" x="24" y="20" width="408" height="408" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#08101F" flood-opacity="0.28" />
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <rect x="52" y="48" width="352" height="352" rx="28" fill="url(#goldFill)" />
+    <rect x="52" y="48" width="352" height="352" rx="28" stroke="url(#goldStroke)" stroke-width="8" />
+    <path d="M159 332L208 84H239L319 332H279L262 271H189L173 332H159ZM196 239H255L226 120L196 239Z" fill="#19213C" />
+    <path d="M286 84H350V303C350 341 321 364 288 364H249V329H279C291 329 298 321 298 307V84H286Z" fill="#19213C" />
+    <path d="M74 296C127 298 180 311 228 338" stroke="#19213C" stroke-width="18" stroke-linecap="round" />
+    <path d="M114 345L138 255" stroke="#19213C" stroke-width="12" stroke-linecap="round" />
+    <path d="M76 394H392" stroke="#A98541" stroke-width="12" stroke-linecap="round" />
+  </g>
+</svg>
