@@ -4,7 +4,7 @@ import { PageIntro } from "@/components/sections/page-intro";
 
 export default function FaqPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageIntro
         eyebrow="FAQ"
         title="Informações objetivas para esclarecer as dúvidas mais comuns antes do atendimento."

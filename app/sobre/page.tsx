@@ -4,7 +4,7 @@ import { PageIntro } from "@/components/sections/page-intro";
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageIntro
         eyebrow="Sobre"
         title="Um escritório guiado por seriedade, clareza e compromisso com cada cliente."

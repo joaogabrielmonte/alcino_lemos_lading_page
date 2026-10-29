@@ -8,24 +8,28 @@ import { Container } from "@/components/ui/container";
 const routeHighlights = [
   {
     title: "Áreas de Atuação",
+    linkLabel: "Conhecer as áreas de atuação",
     description:
       "Conheça os principais campos de atuação do escritório e encontre o suporte jurídico adequado para a sua demanda.",
     href: "/areas-de-atuacao",
   },
   {
     title: "Sobre o Escritório",
+    linkLabel: "Conhecer o escritório",
     description:
       "Entenda a forma de trabalho, a postura profissional e os valores que orientam cada atendimento.",
     href: "/sobre",
   },
   {
     title: "Método de Atendimento",
+    linkLabel: "Entender o atendimento",
     description:
       "Veja como o atendimento é conduzido, desde a análise inicial até o acompanhamento de cada etapa.",
     href: "/atendimento",
   },
   {
     title: "Contato",
+    linkLabel: "Entrar em contato",
     description:
       "Fale com o escritório por WhatsApp ou e-mail e receba uma orientação inicial com clareza.",
     href: "/contato",
@@ -34,7 +38,7 @@ const routeHighlights = [
 
 export default function HomePage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <HeroSection />
       <TrustSection />
 
@@ -70,9 +74,9 @@ export default function HomePage() {
 
                 <Link
                   href={item.href}
-                  className="mt-6 inline-flex items-center text-sm font-semibold text-[#b38a46] transition hover:text-[#8f6f37]"
+                  className="mt-6 inline-flex items-center text-sm font-semibold text-[#76551f] transition hover:text-[#19213c]"
                 >
-                  Saiba mais
+                  {item.linkLabel}
                 </Link>
               </Reveal>
             ))}

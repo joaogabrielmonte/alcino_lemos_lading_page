@@ -1,7 +1,6 @@
 "use client";
 
-import type { CSSProperties, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -10,53 +9,23 @@ type RevealProps = {
   y?: number;
 };
 
-export function Reveal({
-  children,
-  className = "",
-  delay = 0,
-  y = 56,
-}: RevealProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+export function Reveal({ children, className = "", delay = 0, y = 24 }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [entered, setEntered] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
-
-    if (!element) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "0px 0px -12% 0px",
-        threshold: 0.18,
-      },
-    );
-
+    if (!element || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setEntered(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0, rootMargin: "0px 0px -30px 0px" });
     observer.observe(element);
-
     return () => observer.disconnect();
   }, []);
 
-  const style = {
-    transitionDelay: `${delay}s`,
-    "--reveal-offset": `${y}px`,
-  } as CSSProperties;
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal-up ${isVisible ? "is-visible" : ""} ${className}`.trim()}
-      style={style}
-    >
-      {children}
-    </div>
-  );
+  const style = { "--reveal-offset": `${Math.min(y, 24)}px`, "--reveal-delay": `${delay}s` } as CSSProperties;
+  return <div ref={ref} className={`reveal-up ${entered ? "has-entered" : ""} ${className}`.trim()} style={style}>{children}</div>;
 }

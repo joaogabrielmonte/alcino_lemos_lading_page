@@ -3,14 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { navigationLinks } from "@/constants/navigation";
 
 export function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [isMenuOpen]);
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -34,11 +45,12 @@ export function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav aria-label="Navegação principal" className="hidden items-center gap-8 lg:flex">
           {navigationLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              aria-current={isActiveLink(item.href) ? "page" : undefined}
               className={`text-sm font-medium transition ${
                 isActiveLink(item.href)
                   ? "text-[#fff1aa]"
@@ -63,15 +75,17 @@ export function Navbar() {
             className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[rgba(255,241,170,0.20)] text-[#fff1aa] lg:hidden"
             onClick={() => setIsMenuOpen((current) => !current)}
             aria-expanded={isMenuOpen}
-            aria-label="Abrir menu"
+            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-controls="mobile-navigation"
           >
             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </Container>
 
+      <AnimatePresence>
       {isMenuOpen ? (
-        <>
+        <motion.div key="mobile-menu" initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.18 }}>
           <button
             type="button"
             className="fixed inset-0 top-20 z-40 bg-[rgba(6,10,22,0.32)] lg:hidden"
@@ -79,13 +93,14 @@ export function Navbar() {
             onClick={() => setIsMenuOpen(false)}
           />
 
-          <div className="absolute inset-x-0 top-full z-50 px-4 pt-4 lg:hidden">
+          <motion.div initial={reduceMotion ? false : { opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }} transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeOut" }} className="absolute inset-x-0 top-full z-50 px-4 pt-4 lg:hidden">
             <div className="mx-auto w-full max-w-[var(--container-width)] rounded-[24px] border border-[rgba(255,241,170,0.14)] bg-[rgba(20,28,52,0.98)] p-4 shadow-[0_24px_60px_rgba(5,10,22,0.32)] backdrop-blur-2xl">
-              <nav className="flex flex-col gap-3">
+              <nav id="mobile-navigation" aria-label="Navegação móvel" className="flex flex-col gap-3">
                 {navigationLinks.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-current={isActiveLink(item.href) ? "page" : undefined}
                     className={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
                       isActiveLink(item.href)
                         ? "bg-[rgba(255,241,170,0.10)] text-[#fff1aa]"
@@ -106,9 +121,10 @@ export function Navbar() {
                 </Link>
               </nav>
             </div>
-          </div>
-        </>
+          </motion.div>
+        </motion.div>
       ) : null}
+      </AnimatePresence>
     </header>
   );
 }

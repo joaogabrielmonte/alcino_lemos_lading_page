@@ -12,7 +12,7 @@ export function HeroSection() {
         <div className="grid gap-8 rounded-[32px] border border-[rgba(255,241,170,0.16)] bg-[rgba(255,255,255,0.04)] px-5 py-5 shadow-[0_20px_70px_rgba(9,14,28,0.20)] sm:px-10 sm:py-12 lg:grid-cols-[1fr_420px] lg:px-14">
           <Reveal
             delay={0.12}
-            className="order-1 overflow-hidden rounded-[28px] border border-[rgba(255,241,170,0.14)] bg-[rgba(255,255,255,0.06)] lg:order-2"
+            className="order-2 overflow-hidden rounded-[28px] border border-[rgba(255,241,170,0.14)] bg-[rgba(255,255,255,0.06)] lg:order-2"
           >
             <Image
               src="/images/hero-portrait.jpg"
@@ -24,7 +24,7 @@ export function HeroSection() {
             />
           </Reveal>
 
-          <Reveal className="order-2 max-w-4xl px-1 pb-2 pt-1 sm:px-0 lg:order-1">
+          <Reveal className="order-1 max-w-4xl px-1 pb-2 pt-1 sm:px-0 lg:order-1">
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#fff1aa]">
               Início
             </span>

@@ -30,6 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-BR">
       <body className={`${headingFont.variable} ${bodyFont.variable}`}>
+        <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
         <Navbar />
         {children}
         <Footer />

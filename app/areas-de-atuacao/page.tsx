@@ -4,7 +4,7 @@ import { PracticeAreasSection } from "@/components/sections/practice-areas-secti
 
 export default function PracticeAreasPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageIntro
         eyebrow="Áreas de atuação"
         title="Atuação jurídica orientada por profundidade técnica e estratégia."

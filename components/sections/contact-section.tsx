@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -6,17 +7,21 @@ import { Reveal } from "@/components/ui/reveal";
 const contactChannels = [
   {
     title: "WhatsApp",
+    icon: MessageCircle,
     description:
       "Canal direto para iniciar a conversa e apresentar os pontos principais da demanda.",
     href: "https://wa.me/5561982636857",
-    label: "Abrir WhatsApp",
+    label: "Conversar pelo WhatsApp",
+    detail: "(61) 98263-6857",
   },
   {
     title: "E-mail",
+    icon: Mail,
     description:
       "Envie uma mensagem com as informações iniciais para receber retorno com orientação objetiva.",
     href: "mailto:alcinolemos.advocacia@gmail.com",
     label: "Enviar e-mail",
+    detail: "alcinolemos.advocacia@gmail.com",
   },
 ];
 
@@ -81,11 +86,14 @@ export function ContactSection() {
                   delay={index * 0.08 + 0.12}
                   className="rounded-[32px] border border-[rgba(25,33,60,0.08)] bg-white p-8 shadow-[0_12px_40px_rgba(25,33,60,0.06)]"
                 >
+                  <channel.icon aria-hidden="true" size={24} className="mb-5 text-[#76551f]" />
                   <h3 className="text-2xl text-[#19213c]">{channel.title}</h3>
 
                   <p className="mt-4 text-base leading-8 text-[#4f5b70]">
                     {channel.description}
                   </p>
+
+                  <p className="mt-4 break-all text-sm font-semibold text-[#19213c]">{channel.detail}</p>
 
                   <Link
                     href={channel.href}

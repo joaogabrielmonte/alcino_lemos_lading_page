@@ -4,7 +4,7 @@ import { ProcessSection } from "@/components/sections/process-section";
 
 export default function AtendimentoPage() {
   return (
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <PageIntro
         eyebrow="Atendimento"
         title="Um processo de atendimento estruturado para conduzir cada caso com segurança."

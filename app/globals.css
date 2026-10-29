@@ -65,6 +65,25 @@ a {
   text-decoration: none;
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #19213c;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid #b38a46;
+  outline-offset: 4px;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -85,22 +104,18 @@ section {
   animation: page-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.reveal-up {
-  --reveal-offset: 56px;
-  opacity: 0;
-  transform: translate3d(0, var(--reveal-offset), 0) scale(0.96);
-  filter: blur(8px);
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform, filter;
+/* Content stays visible by default, including without JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-up.has-entered {
+    animation: reveal-on-scroll 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: var(--reveal-delay, 0s);
+  }
+  .reveal-up:focus-within { animation: none; }
 }
 
-.reveal-up.is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0);
+@keyframes reveal-on-scroll {
+  from { opacity: 0.65; transform: translateY(var(--reveal-offset, 24px)); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-glow {
@@ -153,6 +168,8 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
   .page-enter,
   .hero-glow {
     animation: none;
